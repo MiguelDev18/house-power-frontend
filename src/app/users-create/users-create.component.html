@@ -1,0 +1,40 @@
+
+<h1>Bienvenido</h1>
+<div class="container theme-showcase" role="main"></div>
+ <!-- Example row of columns -->
+ <br>
+        
+ <div class="col-md-8 order-md-1">
+    <form class="form-horizontal main-form">
+        <div class="mb-3">
+            <label for="nombre">Nombre </label>
+            <input type="text" class="form-control" name="nombre"
+              id="nombre" [(ngModel)]="user.nombre" required="required" />
+        </div>
+        <div class="mb-3">
+            <label for="telefono">Teléfono </label>
+            <input type="text" class="form-control" name="telefono"
+              id="telefono" [(ngModel)]="user.telefono" required="required" />
+        </div>
+        <div class="mb-3">
+            <label for="email">Email </label>
+            <input type="email" class="form-control" name="email"
+              id="email" [(ngModel)]="user.email" required="required" placeholder="you@example.com"/>
+        </div>
+        <div class="mb-3">
+            <label for="username">Nombre de Usuario </label>
+            <input type="text" class="form-control" name="username"
+              id="username" [(ngModel)]="user.username" required="required"/>
+        </div>
+        <div class="mb-3">
+            <label for="password">Contraseña </label>
+            <input type="password" class="form-control" name="password"
+              id="password" [(ngModel)]="user.password" required="required"/>
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="save()">Registrar</button>
+        </div>
+
+    </form>
+  </div>

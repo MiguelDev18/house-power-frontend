@@ -1,0 +1,25 @@
+
+<h1>Bienvenido</h1>
+<div class="container theme-showcase" role="main"></div>
+ <!-- Example row of columns -->
+ <br>
+        
+ <div class="col-md-8 order-md-1">
+    <form class="form-horizontal main-form">
+        <div class="mb-3">
+            <label for="ciudad">Ciudad </label>
+            <input type="text" class="form-control" name="ciudad"
+              id="ciudad" [(ngModel)]="house.ciudad" required="required" />
+        </div>
+        <div class="mb-3">
+            <label for="direccion">Dirección </label>
+            <input type="text" class="form-control" name="direccion"
+              id="direccion" [(ngModel)]="house.direccion" required="required" />
+        </div>
+       
+        <div class="mb-3">
+            <button class="btn btn-primary btn-lg btn-block" type="submit" (click)="saveHouse()">Registrar</button>
+        </div>
+
+    </form>
+  </div>
