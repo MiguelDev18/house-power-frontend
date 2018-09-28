@@ -1,6 +1,7 @@
-.clear{
-    padding: 15px;
-}
+
 .editIcon{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     cursor: pointer;
 }

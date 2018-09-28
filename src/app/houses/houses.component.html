@@ -1,10 +1,9 @@
 
-<h1>Bienvenido</h1>
 <div class="container theme-showcase" role="main">
  
 
   <hr>
-  <a href="/create_house" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Nuevo Hogar</a>
+  <a href="/houses/create_house" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Nuevo Hogar</a>
   
   <hr>
   
@@ -14,7 +13,9 @@
 <th scope="col">Ciudad</th>
 <th scope="col">Direccion</th>
 <th scope="col">Nombre de usuario</th>
-<th scope="col">Opciones</th>
+<th scope="col" style="text-align: center;">Consumo energético</th>
+<th scope="col">editar</th>
+<th scope="col">eliminar</th>
 </tr>
 </thead>
 <tbody>
@@ -24,8 +25,13 @@
 <td>{{item.direccion }}</td>
 <td>{{item.usuario.nombre }}</td>
 <td>
-  <img class="center-block editIcon" src="../../assets/pencil3(2).png" [routerLink]="['/create_house', item.id]">
-  <img class="center-block editIcon" src="../../assets/deletered.png" (click)="deleteHouse(item)">
+  <img class="editIcon" src="../../assets/icons8-luz-encendida-48.png" [routerLink]="['/houses/energy', item.id]">
+</td>
+<td>
+  <img class="editIcon" src="../../assets/pencil3(2).png" [routerLink]="['/houses/create_house', item.id]">
+</td>
+<td>
+  <img class="editIcon" src="../../assets/deletered.png" (click)="deleteHouse(item)">
 </td>
 <!--
 <td>{{item.username }}</td>

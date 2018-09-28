@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { User } from './user.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -35,11 +35,11 @@ export class UsersComponent implements OnInit {
   }
   newUser(): void{
     sessionStorage.clear();
-    this.router.navigate(['create_users']);
+    this.router.navigate(['users/create_users']);
   }
   editUser(user: User): void{
     sessionStorage.setItem('user', JSON.stringify(user));
-    this.router.navigate(['create_users']);
+    this.router.navigate(['users/create_users']);
   }
   deleteUser(user: User): void{
     swal({

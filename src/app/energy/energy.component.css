@@ -1,0 +1,22 @@
+.centrar {
+    /*
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px solid #ccc;*/
+    /* IMPORTANTE */
+    /*display: table;
+    height:200px;*/
+    
+    width:75%;
+    margin:auto;
+  }
+  .centrar-content{
+    display: table-cell;
+	vertical-align: middle;
+  }
+  .test {
+    width: 100px;
+    height:100px;
+    margin: 0px auto;
+    border: 1px solid red;
+  }

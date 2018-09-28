@@ -1,5 +1,4 @@
 
-<h1>Bienvenido</h1>
 <div class="container theme-showcase" role="main">
  
 
@@ -16,7 +15,8 @@
 <th scope="col">Email</th>
 <th scope="col">Nombre de usuario</th>
 <th scope="col">Hogares del usuario</th>
-<th scope="col">Opciones de usuario</th>
+<th scope="col">editar</th>
+<th scope="col">eliminar</th>
 </tr>
 </thead>
 <tbody>
@@ -27,11 +27,13 @@
 <td>{{item.email }}</td>
 <td>{{item.username }}</td>
 <td>
-    <img class="center-block editIcon" src="../../assets/icons8-casa-48.png" (click)="loadHousesPage(item)">
+    <img class="editIcon" src="../../assets/icons8-casa-48.png" (click)="loadHousesPage(item)">
 </td>
 <td>
-  <img class="center-block editIcon" src="../../assets/pencil3(2).png" (click)="editUser(item)">
-  <img class="center-block editIcon" src="../../assets/deletered.png" (click)="deleteUser(item)">
+  <img class="editIcon" src="../../assets/pencil3(2).png" (click)="editUser(item)">
+</td>
+<td>
+  <img class="editIcon" src="../../assets/deletered.png" (click)="deleteUser(item)">
 </td>
 
 

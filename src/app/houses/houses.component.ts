@@ -32,6 +32,7 @@ export class HousesComponent implements OnInit {
       console.log(resp);
       this.houses = resp;
     });
+    console.log(this.houses);
   }
 
   deleteHouse(house: House): void{

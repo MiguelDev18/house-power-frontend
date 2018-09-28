@@ -30,7 +30,7 @@ export class HouseCreateComponent implements OnInit {
       let id = params['id'];
       if(id){
         console.log("si id");
-        this.housesService.getHouse(id).subscribe( house => this.house = house)
+        this.housesService.getHouse(id).subscribe( house => this.house = house);
       }else{
         this.house = new House();
         console.log(JSON.parse(sessionStorage.getItem("user")).id);
