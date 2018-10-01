@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { House } from './house.model';
+import { WS_URL } from './../httpconstants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,10 +15,10 @@ const httpOptions = {
 })
 export class HousesService {
 
-  private housesUrl = 'http://localhost:8089/get_house_user';
-  private houseUrl = 'http://localhost:8089/get_house';
-  private saveHouseUrl = 'http://localhost:8089/save_house';
-  private deleteHouseUrl = 'http://localhost:8089/delete_house';
+  private housesUrl = WS_URL + '/get_house_user';
+  private houseUrl = WS_URL + '/get_house';
+  private saveHouseUrl = WS_URL + '/save_house';
+  private deleteHouseUrl = WS_URL + '/delete_house';
 
   constructor(private http: HttpClient) { }
   

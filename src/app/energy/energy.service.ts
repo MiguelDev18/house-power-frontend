@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { Energy } from './energy.model';
+import { WS_URL } from './../httpconstants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,7 +14,7 @@ const httpOptions = {
 })
 export class EnergyService {
 
-  private energyUrl = 'http://localhost:8089/get_data';
+  private energyUrl = WS_URL + '/get_data';
 
   constructor(private http: HttpClient) { }
 

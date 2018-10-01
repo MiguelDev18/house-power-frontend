@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { WS_URL } from './../httpconstants';
+
 const httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json'
@@ -14,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UsersCreateService {
-  private saveUsersUrl = 'http://localhost:8089/save_user';
+  private saveUsersUrl = WS_URL + '/save_user';
 
   constructor(private http:HttpClient) { }
 

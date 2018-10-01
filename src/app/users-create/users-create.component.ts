@@ -13,7 +13,7 @@ import swal from 'sweetalert2'
 })
 export class UsersCreateComponent implements OnInit {
 
-  private user: User;
+  user: User;
   private message: string;
   private response: ResponsePost;
   constructor(

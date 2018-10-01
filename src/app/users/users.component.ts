@@ -13,7 +13,7 @@ import swal from 'sweetalert2';
 })
 export class UsersComponent implements OnInit {
 
-  private users: Array<User>;
+  users: Array<User>;
 
   constructor(
     private usersService: UsersService,

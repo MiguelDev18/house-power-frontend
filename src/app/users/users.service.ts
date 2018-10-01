@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient,HttpHeaders } from "@angular/common/http";
 
 import { User } from './user.model';
+import { WS_URL } from './../httpconstants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -13,8 +14,8 @@ const httpOptions = {
 @Injectable()
 export class UsersService {
 
-  private usersUrl = "http://localhost:8089/get_users";
-  private deleteUrl = "http://localhost:8089/delete_user";
+  private usersUrl = WS_URL + "/get_users";
+  private deleteUrl = WS_URL + "/delete_user";
 
   constructor(private http: HttpClient) { }
 

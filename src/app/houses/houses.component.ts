@@ -12,7 +12,7 @@ import { House } from './house.model';
 })
 export class HousesComponent implements OnInit {
 
-  private houses: Array<House>
+  houses: Array<House>
   private user: User;
   constructor(private housesService: HousesService) {}
 
