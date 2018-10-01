@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 })
 export class UsersComponent implements OnInit {
 
+  //arreglo de usuarios para cargar en la vista
   users: Array<User>;
 
   constructor(
@@ -24,24 +25,35 @@ export class UsersComponent implements OnInit {
     this.loadUsers();
   }
 
+  //cargar lista de usuarios desde el backend
   loadUsers(): void{
     this.usersService.getUsers().subscribe(resp => {
       this.users = resp;
     });
   }
+
+  //ir a la pagina de hogares usando los datos del usuario
   loadHousesPage(user: User): void{
+    //almacenar los datos del usuario en el sessionStorage
     sessionStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['houses']);
   }
+
+  //cargar el formulario de creacion de nuevos usuarios
   newUser(): void{
     sessionStorage.clear();
     this.router.navigate(['users/create_users']);
   }
+
+  //cargar el formulario de edicion de usuarios 
   editUser(user: User): void{
     sessionStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['users/create_users']);
   }
+
+
   deleteUser(user: User): void{
+    //desplegar mensaje de confirmacion
     swal({
       title: 'Está seguro?',
       text: `¿Seguro que desea eliminar al usuario ${user.username} ?`,
@@ -56,13 +68,15 @@ export class UsersComponent implements OnInit {
       buttonsStyling: false,
       reverseButtons: true
     }).then((result) => {
+      //ejecutar la peticion si se confirma la accion
       if (result.value){
         this.usersService.deleteUser(user.id).subscribe(
           respose => {
+            //cargar nuevamente la lista de usuarios
             this.loadUsers();
-            console.log(respose)
+            //mostrar mensaje de exito
             swal(
-              'Cliente Eliminado!',
+              'Usuario Eliminado!',
               respose.message,
               'success'
             )

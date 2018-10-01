@@ -13,8 +13,8 @@ import { User } from '../users/user.model';
 export class HouseCreateComponent implements OnInit {
 
   house: House;
-  private id: number;
   private user: User;
+  
   constructor(
     private activatedRoute: ActivatedRoute,
     private housesService: HousesService,
@@ -24,19 +24,18 @@ export class HouseCreateComponent implements OnInit {
   ngOnInit() {
     this.loadHouse();
   }
-  
+  //cargar los hogares desde backend
   loadHouse(): void{
     this.activatedRoute.params.subscribe(params => {
-      let id = params['id'];
+      let id = params['id']; //obtener id del hogar desde la peticion get
       if(id){
-        console.log("si id");
         this.housesService.getHouse(id).subscribe( house => this.house = house);
       }else{
+        //si no hay id en la peticion http crear nuevo hogar 
         this.house = new House();
-        console.log(JSON.parse(sessionStorage.getItem("user")).id);
+        //recuperar datos de usuario desde el sessionStorage
         this.user = JSON.parse(sessionStorage.getItem("user"));
         this.house.usuario = this.user;
-        console.log(this.user);
         
       }
     });
@@ -45,7 +44,9 @@ export class HouseCreateComponent implements OnInit {
   saveHouse(): void{
     this.housesService.saveHouse(this.house).subscribe(
       response => {
+        //cargar pagina de hogares
         this.router.navigate(['/houses']);
+        //desplegar mensaje de exito
         swal(
           'Hogar Guardado!',
           response.message,

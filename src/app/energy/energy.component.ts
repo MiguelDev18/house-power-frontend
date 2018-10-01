@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { Chart } from 'chart.js';
 
 import { EnergyService } from './energy.service';
@@ -13,11 +13,9 @@ import { Energy } from './energy.model';
 export class EnergyComponent implements OnInit {
 
   LineChart=[];
-  //myChart=[];
-  //ctx = document.getElementById("myChart");
   private energyData: Array<Energy>;
-  dataEnergiaDia=[];
-  dataDia=[];
+  dataEnergiaDia=[]; //almacena los datos de el eje y
+  dataDia=[]; //almacena los datos de el eje x
 
   constructor(
       private activatedRoute: ActivatedRoute,
@@ -26,23 +24,38 @@ export class EnergyComponent implements OnInit {
 
   ngOnInit() {
       this.loadEnergy();
-      /*
-      this.dataDia = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
-      console.log(this.dataEnergiaDia)
-      this.dataEnergiaDia = [12, 19, 3, 5, 2, 3];
-      this.loadChart();*/
-
-    
-   // this.loadEnergy();
+      
   }
+
+  //trae los datos desde el backend
+  loadEnergy(): void{
+    this.activatedRoute.params.subscribe(params => {
+        let idHouse = params['idHouse']; //obtener id del hogar desde la peticion get
+        if(idHouse){
+            this.energyService.getEnergyData(idHouse).subscribe(energyData => {
+                //guarda datos recuperados desde el backend
+                this.energyData = energyData;
+                //guarda los datos recuperados en arreglos
+                this.dataEnergiaDia = this.energyData.map(data => data.energiaDia);
+                this.dataDia = this.energyData.map(data => data.dia);
+                //carga el grafico con los datos recuperados desde el backend
+                this.loadChart();
+            });
+            
+        }
+    });
+  }
+
   loadChart(): void{
     this.LineChart = new Chart('lineChart', {
         type: 'line',
         data: {
-          labels: this.dataDia,//["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          //datos en el eje x
+          labels: this.dataDia,
           datasets: [{
             label: 'WattsHora (Wh)',
-            data: this.dataEnergiaDia,//[12, 19, 3, 5, 2, 3],
+            //datos en el eje y
+            data: this.dataEnergiaDia,
             fill:false,
             lineTension:0.2,
             borderColor:"red",
@@ -51,7 +64,8 @@ export class EnergyComponent implements OnInit {
         },
         options: {
           title:{
-            text:"Line Chart",
+            //nombre del grafico
+            text:"Consumo de Energía",
             display:true
           },
           scales:{
@@ -65,24 +79,6 @@ export class EnergyComponent implements OnInit {
       });
   }
 
-  loadEnergy(): void{
-    this.activatedRoute.params.subscribe(params => {
-        let idHouse = params['idHouse'];
-        if(idHouse){
-            this.energyService.getEnergyData(idHouse).subscribe(energyData => {
-                console.log(energyData);
-                this.energyData = energyData;
-                this.dataEnergiaDia = this.energyData.map(data => data.energiaDia);
-                console.log(this.dataEnergiaDia);
-                this.dataDia = this.energyData.map(data => data.dia);
-                console.log(this.dataDia);
-                this.loadChart();
-            });
-            console.log(this.dataEnergiaDia);
-            console.log(this.dataDia);
-            console.log(this.energyData);
-        }
-    });
-  }
+  
 
 }

@@ -12,7 +12,6 @@ import { UsersCreateComponent } from './users-create/users-create.component';
 import { HousesComponent } from './houses/houses.component';
 
 import { UsersService } from './users/users.service';
-import { UsersCreateService } from './users-create/users-create.service';
 import { HousesService } from './houses/houses.service';
 import { HouseCreateComponent } from './house-create/house-create.component';
 import { EnergyComponent } from './energy/energy.component';
@@ -34,7 +33,7 @@ import { EnergyComponent } from './energy/energy.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UsersService, UsersCreateService, HousesService],
+  providers: [UsersService, HousesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

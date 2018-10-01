@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { House } from './house.model';
 import { WS_URL } from './../httpconstants';
 
+//cabeceras de la peticion
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -15,6 +16,7 @@ const httpOptions = {
 })
 export class HousesService {
 
+  //url de la peticion (url del servidor) + (endpoint)
   private housesUrl = WS_URL + '/get_house_user';
   private houseUrl = WS_URL + '/get_house';
   private saveHouseUrl = WS_URL + '/save_house';
@@ -23,37 +25,26 @@ export class HousesService {
   constructor(private http: HttpClient) { }
   
 
+  //observar la lista de hogares desde el backend
   getHouses(username: string): Observable<House[]>{
-    console.log(this.housesUrl);
-    console.log(JSON.stringify({"username":username}));
-    console.log(httpOptions);
-    return this.http.post<House[]>(this.housesUrl, JSON.stringify({"username":username}), httpOptions)/*.pipe(
-      catchError(this.handleError<House[]>('addHero'))
-    )*/;
+    return this.http.post<House[]>(this.housesUrl, JSON.stringify({"username":username}), httpOptions);
   }
 
+  //obtener hogar por id
   getHouse(id):Observable<House>{
     return this.http.get<House>(`${this.houseUrl}/${id}`)
   }
 
+  //guardar hogar en el backend
   saveHouse(house: House): Observable<any>{
     return this.http.post(this.saveHouseUrl,house,httpOptions)
   }
 
+  //borrar hogar con id: houseID
   deleteHouse(houseID: number): Observable<any>{
     return this.http.post(this.deleteHouseUrl,JSON.stringify({"id":houseID}),httpOptions)
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
   
 }
 
