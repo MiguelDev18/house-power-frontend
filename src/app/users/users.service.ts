@@ -23,8 +23,8 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   //observar la lista de usuarios desde el backend
-  getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(this.usersUrl);
+  getUsers(): Promise<User[]>{
+    return this.http.get<User[]>(this.usersUrl).toPromise();
     
   }
   

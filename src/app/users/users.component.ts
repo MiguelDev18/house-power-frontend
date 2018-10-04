@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
 
   //cargar lista de usuarios desde el backend
   loadUsers(): void{
-    this.usersService.getUsers().subscribe(resp => {
+    this.usersService.getUsers().then(resp => {
       this.users = resp;
     });
   }
