@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 import { HousesComponent } from './houses/houses.component';
 import { HouseCreateComponent } from './house-create/house-create.component';
 import { EnergyComponent } from './energy/energy.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'welcome', component: WelcomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'users', component: UsersComponent },
   { path: 'users/create_users', component: UsersCreateComponent },
   { path: 'houses', component: HousesComponent },

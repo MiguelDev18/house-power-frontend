@@ -15,6 +15,7 @@ import { UsersService } from './users/users.service';
 import { HousesService } from './houses/houses.service';
 import { HouseCreateComponent } from './house-create/house-create.component';
 import { EnergyComponent } from './energy/energy.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EnergyComponent } from './energy/energy.component';
     UsersCreateComponent,
     HousesComponent,
     HouseCreateComponent,
-    EnergyComponent
+    EnergyComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
