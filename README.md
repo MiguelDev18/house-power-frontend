@@ -13,3 +13,6 @@ https://github.com/MiguelDev18/house-power
 En el siguiente enlace se puede observar el despliegue de la aplicación en la nube de heroku.
 https://house-power-frontend.herokuapp.com/
 
+Versión con Spring Security:
+https://house-power-frontend-login.herokuapp.com
+https://house-power-spring-security.herokuapp.com
