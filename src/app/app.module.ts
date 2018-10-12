@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './includes/navbar/navbar.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -33,7 +35,8 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ],
   providers: [UsersService, HousesService],
   bootstrap: [AppComponent]

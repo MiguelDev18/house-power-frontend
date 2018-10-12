@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import swal from 'sweetalert2'
 import { HousesService } from './../houses/houses.service';
 import { User } from '../users/user.model';
+import { AuthenticationService } from './../authentication.service';
 
 @Component({
   selector: 'app-house-create',
@@ -18,13 +19,15 @@ export class HouseCreateComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private housesService: HousesService,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.loadHouse();
   }
-  //cargar los hogares desde backend
+  //cargar los hogares desde 
+  
   loadHouse(): void{
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']; //obtener id del hogar desde la peticion get
@@ -33,9 +36,19 @@ export class HouseCreateComponent implements OnInit {
       }else{
         //si no hay id en la peticion http crear nuevo hogar 
         this.house = new House();
-        //recuperar datos de usuario desde el sessionStorage
-        this.user = JSON.parse(sessionStorage.getItem("user"));
+        
+        //si es admin
+        if(sessionStorage.getItem('user') && this.authenticationService.isAdmin()){
+          this.user = JSON.parse(sessionStorage.getItem('user'));
+        }else{
+          //si es user recuperar datos del usuario logeado 
+          this.user = new User();
+          this.user.username = JSON.parse(localStorage.getItem('currentUser')).username;
+          console.log("username", this.user.username);
+          //this.user = new User();
+        }
         this.house.usuario = this.user;
+        console.log(this.house);
         
       }
     });

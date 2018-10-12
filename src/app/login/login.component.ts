@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
+import { Router } from "@angular/router";
 
 import { AuthenticationService } from './../authentication.service';
 import { User } from './../users/user.model';
@@ -14,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   user: User;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit() {
     //cargar usuario desde el localStorage
@@ -31,23 +34,38 @@ export class LoginComponent implements OnInit {
       response => {
         let token = response.token;
         let username = response.user.username;
-        console.log(token);
+        let roles = response.user.authorities;
         //
         if(token){
           //Guardar token en el localStorage
-          localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}))
-          console.log(localStorage.getItem('currentUser'));
+          localStorage.setItem('currentUser', JSON.stringify({username: username, token: token, roles:roles}))
+          this.authenticationService.setRoles();
         }
-        else {
+        
+        window.location.reload();
+        if(this.authenticationService.isAdmin()){
+          this.router.navigate(['/users']);
+          
+        
 
-          swal(
-            response.error,
-            response.message,
-            'warning'
-          )
+        } else {
+          //cargar pagina de hogares
+          this.router.navigate(['/houses']);
+          
+        
         }
-      }
+        
+      },
+      //desplegar mensaje de error
+      error => 
+      swal(
+        error.error.error,
+        error.error.mensaje,
+        'warning'
+      )
+
     )
+
     
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2'
 import { HousesService } from './../houses/houses.service';
-
+import { AuthenticationService } from './../authentication.service';
 import { User } from '../users/user.model';
 import { House } from './house.model';
 
@@ -15,21 +15,26 @@ export class HousesComponent implements OnInit {
   //arreglo de hogares para cargar en la vista
   houses: Array<House>;
   private user: User;
-  constructor(private housesService: HousesService) {}
+  private username: string;
+  constructor(
+    private housesService: HousesService, 
+    private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
     //recuperar datos de usuario desde el sessionStorage
-    if(sessionStorage.getItem("user")){
-      this.user = JSON.parse(sessionStorage.getItem("user"));
+    if(sessionStorage.getItem('user') && this.authenticationService.isAdmin()){
+      this.username = JSON.parse(sessionStorage.getItem('user')).username;
     }else{
-      this.user = new User();
+      //recuperar datos del usuario logeado
+      this.username = JSON.parse(localStorage.getItem('currentUser')).username;
+      //this.user = new User();
     }
     this.getHouses();
   }
 
   //recuperar lista de hogares desde el servidor
   getHouses(): void{
-    this.housesService.getHouses(this.user.username).subscribe(resp => {
+    this.housesService.getHouses(this.username).subscribe(resp => {
       this.houses = resp;
     });
   }

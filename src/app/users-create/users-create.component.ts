@@ -31,8 +31,8 @@ export class UsersCreateComponent implements OnInit {
   saveUser(): void{
     this.usersService.save(this.user).subscribe(
       response => {
-        //cargar pagina de usuarios
-        this.router.navigate(['/users']);
+        //cargar pagina de bienvenida
+        this.router.navigate(['/']);
         //desplegar mensaje de exito
         swal(
           'Usuario Guardado!',
